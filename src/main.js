@@ -1,6 +1,9 @@
 import Vue from 'vue'
+import './cube-ui'
 import App from './App.vue'
 import router from './router'
+
+import './assets/stylus/index.styl'
 
 Vue.config.productionTip = false
 

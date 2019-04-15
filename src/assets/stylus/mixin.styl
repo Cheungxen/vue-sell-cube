@@ -1,0 +1,22 @@
+@import '~cube-ui/src/common/stylus/mixin.styl'
+
+border-bottom-1px($color=#ccc)
+  position relative
+  &:after
+    display: block
+    position absolute
+    width 100%
+    left 0
+    bottom 0
+    border-top 1px solid $color
+    content: ''
+    @media (min-resolution:2dpx)
+      -webkit-transform: scaleY(.5)
+      transform: scaleY(.5)
+    @media (min-resolution:3dpx)
+      -webkit-transform: scaleY(.333)
+      transform: scaleY(.333)
+
+border-bottom-1px-none()
+  &:after
+    display: none

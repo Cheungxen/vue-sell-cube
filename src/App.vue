@@ -1,25 +1,35 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <v-header :seller="seller"/>
+    <v-tab/>
     <router-view/>
   </div>
 </template>
-<style lang="stylus">
-#app
-  font-family 'Avenir', Helvetica, Arial, sans-serif
-  -webkit-font-smoothing antialiased
-  -moz-osx-font-smoothing grayscale
-  text-align center
-  color #2c3e50
 
-#nav
-  padding 30px
-  a
-    font-weight bold
-    color #2c3e50
-    &.router-link-exact-active
-      color #42b983
+<script>
+import VHeader from './components/v-header/v-header'
+import VTab from './components/v-tab/v-tab'
+import axios from 'axios'
+export default {
+  components: {
+    VHeader,
+    VTab
+  },
+  data () {
+    return {
+      seller: { type: Object, default () { return {} } }
+    }
+  },
+  created () {
+    axios.get('/api/seller').then((res) => {
+      const { status, data: { errno, data } } = res
+      if (status === 200 && errno === 0) {
+        this.seller = data
+      }
+    })
+  }
+}
+</script>
+
+<style lang="stylus">
 </style>
