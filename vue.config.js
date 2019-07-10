@@ -52,6 +52,7 @@ module.exports = {
     config.resolve.alias
       .set('components', resolve('src/components'))
       .set('assets', resolve('src/assets'))
+      .set('src', resolve('src'))
     // config.plugin('context')
     //   .use(webpack.ContextReplacementPlugin,
     //     [/moment[/\\]locale$/, /zh-cn/])

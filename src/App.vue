@@ -2,7 +2,9 @@
   <div id="app">
     <v-header :seller="seller"/>
     <v-tab/>
-    <router-view/>
+    <keep-alive>
+      <router-view :deliveryPrice="seller.deliveryPrice" :minPrice="seller.minPrice" :seller="seller"/>
+    </keep-alive>
   </div>
 </template>
 
@@ -10,6 +12,8 @@
 import VHeader from './components/v-header/v-header'
 import VTab from './components/v-tab/v-tab'
 import axios from 'axios'
+import { formatURL } from 'src/common/stor/stor.js'
+import { format } from 'path';
 export default {
   components: {
     VHeader,
@@ -17,14 +21,20 @@ export default {
   },
   data () {
     return {
-      seller: { type: Object, default () { return {} } }
+      seller: {
+        id: formatURL().id
+      }
     }
   },
   created () {
-    axios.get('/api/seller').then((res) => {
+    axios.get('/api/seller', {
+      params: {
+        id: this.seller.id
+      }
+    }).then((res) => {
       const { status, data: { errno, data } } = res
       if (status === 200 && errno === 0) {
-        this.seller = data
+        this.seller = Object.assign({}, this.seller, data)
       }
     })
   }

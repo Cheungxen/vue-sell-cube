@@ -17,6 +17,28 @@ border-bottom-1px($color=#ccc)
       -webkit-transform: scaleY(.333)
       transform: scaleY(.333)
 
+border-top-1px($color=#ccc)
+  position relative
+  &:before
+    display: block
+    position absolute
+    width 100%
+    left 0
+    top 0
+    border-top 1px solid $color
+    content: ''
+    @media (min-resolution:2dpx)
+      -webkit-transform: scaleY(.5)
+      transform: scaleY(.5)
+    @media (min-resolution:3dpx)
+      -webkit-transform: scaleY(.333)
+      transform: scaleY(.333)
+
 border-bottom-1px-none()
   &:after
     display: none
+
+bg-image($url)
+    background-image: url($url + "@2x.png")
+  @media (min-resolution:3dpx)
+    background-image: url($url + "@3x.png")
